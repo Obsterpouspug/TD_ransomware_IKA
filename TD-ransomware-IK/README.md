@@ -1,3 +1,1 @@
-# td-ransomware-LBA
-
-# td-ransomware-LBA
+TD-ransomware-IK
