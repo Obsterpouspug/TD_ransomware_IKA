@@ -54,6 +54,7 @@ On utilise la commande :
 pyinstaller --onefile --noconsole --icon=icon.ico --add-data
 
 B5 : Où se trouve le binaire créer ?
+
 Le binaire se trouve dans le dossier dist.
 
 B4 : Quelle(s) option(s) vous avez choisi(s) pour vous aider à décrypter un fichier?
