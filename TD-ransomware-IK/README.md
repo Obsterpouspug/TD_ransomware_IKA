@@ -49,6 +49,7 @@ On peut utiliser la fonction derive_key_from_password qui permet de dériver une
 
 
 B4 : Quelle ligne de commande vous faut-il avec pyinstaller pour créer le binaire ?
+
 On utilise la commande :
 pyinstaller --onefile --noconsole --icon=icon.ico --add-data
 
