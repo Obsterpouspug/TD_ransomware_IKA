@@ -1,8 +1,6 @@
  ## TD-ransomware-IK
 
- docker network disconnect <network name> <container id/ container name>ra
-7f89a9217c2e98b9d4b2ba5d3a55baad25c5c15d771b2b5ae249d6482a65264d
-# td-ransomware-LBA
+
 
 
 Question n°1:
