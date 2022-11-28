@@ -2,11 +2,12 @@
 
 
 
-
+# Chiffrement
 Question n°1: Quel est le nom de l'algorithme de chiffrement ? Est-il robuste et pourquoi ?
 
 Il s'agit d'un chiffrement complètement symétrique ce qui signifie qu'a même opération est appliquée au message final pour retrouver le message initial, c'est robuste mais il existe des moyens de le casser. Il peut être attaqué par "Bruteforce" pour trouver la clé. Le partage de la clé est aussi un problème car il faut la partager avec le serveur de la victime pour qu'il puisse décrypter les fichiers et il faut donc que le serveur soit sécurisé et que la clé soit bien protégée pour éviter que quelqu'un d'autre ne puisse la récupérer et décrypter les fichiers de la victime sans son accord et sans qu'il le sache (ce qui est le but de ce ransomware).
 
+# Génération des secrets
 
 Question n°2: Pourquoi ne pas hacher le sel et la clef directement ? Et avec un hmac ?
 
@@ -14,10 +15,13 @@ Car le sel et la clé sont déjà hachés, on ne peut pas les hacher deux fois s
 Et il est mieux de faire les deux séparément pour augmenter le temps d'exécution pour rendre très longues les attaques brutes force.
 Le hmac est utilisé pour vérifier l'intégrité des données, il est donc inutile de l'utiliser pour hacher le sel et la clé.
 
+# Setup
 
 Question n°3: Pourquoi il est préférable de vérifier qu'un fichier token.bin n'est pas déjà présent ?
 
 Pour éviter que le ransomware ne s'exécute plusieurs fois sur le même ordinateur et qu'il ne chiffre plusieurs fois les mêmes fichiers, ainsi demandants plusieurs fois le paiement de la rançon.
+
+# Vérifier et utiliser la clef
 
 Question n°4: Comment vérifier que la clef la bonne ?
 
